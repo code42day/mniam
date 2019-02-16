@@ -3,19 +3,13 @@ const database = require('../lib/database');
 /*global describe, it, before, after, beforeEach, afterEach */
 
 describe('aggregate', function() {
-  before(function(done) {
+  before(function() {
     this.db = database('mongodb://localhost/mniam-test');
-    this.db.drop(() => {
-      this.db.close();
-      done();
-    });
+    return this.db.drop();
   });
 
-  after(function(done) {
-    this.db.drop(() => {
-      this.db.close();
-      done();
-    });
+  after(function() {
+    return this.db.drop();
   });
 
   beforeEach(function(done) {
